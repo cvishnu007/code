@@ -1,9 +1,50 @@
 #include <iostream>
 #include <vector>
 #include <limits> // Required for numeric_limits
-
+#include<queue>
 // It's generally better to use specific headers than <bits/stdc++.h>
 using namespace std;
+
+void bfs(vector<vector<int>> graph,int i)
+{
+    queue<int> q;
+    int visited[graph.size()-1]{0};
+    cout << "BFS:" << endl;
+    cout << i << endl;
+    visited[i]=1;
+    q.push(i);
+    while(!q.empty())
+    {
+        int k = q.front();
+        q.pop();
+        for(auto x: graph[k])
+        {
+            if(visited[x]==0)
+            {
+                cout << x << endl;
+                q.push(x);
+                visited[x]=1;
+            }
+        }
+    }
+}
+
+//int visited[graph.size() - 1]{0};
+void dfs(vector<vector<int>> graph, int i)
+{
+    int visited[graph.size() - 1]{0};
+    if (visited[i] == 0)
+    {
+        cout << i << endl;
+        visited[i] = 1;
+        for (int j = 0; i < graph[i].size(); j++)
+        {
+            dfs(graph, j);
+        }
+    }
+}
+
+/*BFS CODE WORKS PROPERLY I DONT HAVE PATEINCE TO MAKE DFS CODE RUN I WILL UPDATE IT SHORTLY*/
 
 int main() {
     int numVertices;
@@ -55,6 +96,6 @@ int main() {
         }
         cout << endl;
     }
-
+    bfs(graph,1);
     return 0;
 }
